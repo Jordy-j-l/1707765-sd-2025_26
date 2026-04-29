@@ -1,13 +1,14 @@
 # ==================================================
 # IMPORTS
 # ==================================================
+from xmlrpc.server import SimpleXMLRPCServer
 
 
 # ==================================================
 # CONFIGURAÇÕES DO SERVIDOR RPC
 # ==================================================
-# HOST = "localhost"
-# PORT = 8000
+HOST = "localhost"
+PORT = 8000
 
 
 # ==================================================
@@ -46,6 +47,12 @@
 # 3. Consultar saldo
 # 4. Devolver resultado
 
+def ping():
+    return "pong"
+
+
+def obterSaldo(endereco):
+    return f"Endereço recebido: {endereco}"
 
 # ==================================================
 # CRIAÇÃO DO SERVIDOR RPC
@@ -54,3 +61,12 @@
 # Registar a função obterSaldo
 # Mostrar mensagem "Servidor RPC ativo"
 # Manter servidor em execução
+
+server = SimpleXMLRPCServer((HOST, PORT), allow_none=True)
+
+server.register_function(ping, "ping")
+server.register_function(obterSaldo, "obterSaldo")
+
+print(f"Servidor RPC ativo em http://{HOST}:{PORT}", flush=True)
+
+server.serve_forever()
