@@ -1,14 +1,18 @@
 # ==================================================
 # IMPORTS
 # ==================================================
+from xmlrpc.client import ServerProxy
 
 
 # ==================================================
 # CONFIGURAÇÕES DO CLIENTE RPC
 # ==================================================
 # URL do servidor RPC
-# Exemplo: http://localhost:8000
+SERVER_URL = "http://localhost:8000"
+client = ServerProxy(SERVER_URL)
+response = client.ping()
 
+print("Resposta do servidor:", response)
 
 # ==================================================
 # PEDIR ENDEREÇO AO UTILIZADOR
