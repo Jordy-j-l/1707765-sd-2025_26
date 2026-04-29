@@ -52,6 +52,7 @@ def ping():
 
 
 def obterSaldo(endereco):
+    print(f"[LOG] O endereço {endereco} foi solicitado.", flush=True)
     return f"Endereço recebido: {endereco}"
 
 # ==================================================
