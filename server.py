@@ -2,6 +2,7 @@
 # IMPORTS
 # ==================================================
 from xmlrpc.server import SimpleXMLRPCServer
+from web3 import Web3
 
 
 # ==================================================
@@ -16,6 +17,8 @@ PORT = 8000
 # ==================================================
 # URL do provider Ethereum / nó Ethereum
 # Exemplo: INFURA_URL, ALCHEMY_URL ou outro endpoint
+ETHEREUM_PROVIDER = "http://127.0.0.1:7545"
+w3 = Web3(Web3.HTTPProvider(ETHEREUM_PROVIDER))
 
 
 # ==================================================
@@ -44,6 +47,10 @@ def valEndereco(endereco):
 # Converte o saldo de wei para ether
 # Devolve o saldo ao servidor RPC
 
+def consultarSaldoEthereum(endereco):
+    saldo_wei=w3.eth.get_balance(endereco)
+    saldo=w3.from_wei(saldo_wei,"ether") #saldo em ether
+    return str(saldo)
 
 # ==================================================
 # FUNÇÃO RPC DISPONÍVEL PARA O CLIENTE
@@ -64,8 +71,11 @@ def obterSaldo(endereco):
     
     print(f"[LOG] O endereço {endereco} foi solicitado.", flush=True)
     if not valEndereco(endereco):
+        print("Endereço invalido")
         return False
-    return f"Endereço recebido: {endereco}"
+    saldo=consultarSaldoEthereum(endereco)
+
+    return f"Saldo da Conta: {saldo} ETH"
 
 # ==================================================
 # CRIAÇÃO DO SERVIDOR RPC
