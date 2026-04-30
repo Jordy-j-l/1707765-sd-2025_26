@@ -59,7 +59,7 @@ def Show(endereco):
 def menu():
     print()
     print("############################################")
-    print("#           ETHEREUM ACCOUNT                #")
+    print("#           ETHEREUM ACCOUNT               #")
     print("#                 /\\                       #")
     print("#                /  \\                      #")
     print("#               /____\\                     #")
