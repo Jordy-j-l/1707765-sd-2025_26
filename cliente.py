@@ -37,12 +37,14 @@ def Show(endereco):
     client=config()
     try:
         resposta = client.obterSaldo(endereco)
-
+        if not resposta:
+            return False
         print()
         print("############### RESULTADO ##################")
         print(f"Conta: {endereco}")
         print(f"Resposta: {resposta}")
         print("############################################")
+        return True
     except Exception as erro:
         print()
         print("################ ERRO ######################")
@@ -69,10 +71,16 @@ def menu():
 def main():
     
     menu()
-    endereco=input("INSIRA A CONTA DESEJADA =>")
+    endereco=input("INSIRA A CONTA DESEJADA =>").strip()
     print("############################################")
     print("A enviar pedido ao servidor RPC...")
     print("############################################")
-    Show(endereco)
+    while not Show(endereco):
+        print("############################################")
+        print("Endereço invalido tenta de novo...")
+        print("############################################")
+        endereco=input("INSIRA A CONTA DESEJADA =>").strip()
+
+    
 if __name__ == "__main__":
     main()

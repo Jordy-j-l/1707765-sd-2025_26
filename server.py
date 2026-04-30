@@ -25,8 +25,17 @@ PORT = 8000
 # - começa por "0x"
 # - tem 42 caracteres
 # - está bem formado
+def valEndereco(endereco):
 
-
+    if not endereco.startswith("0x"):
+        return False
+    if len(endereco) != 42:
+        return False
+    hex_chars = "0123456789abcdefABCDEF"
+    for c in endereco[2:]:
+        if c not in hex_chars:
+            return False
+    return True
 # ==================================================
 # CONSULTA DO SALDO NA ETHEREUM
 # ==================================================
@@ -52,7 +61,10 @@ def ping():
 
 
 def obterSaldo(endereco):
+    
     print(f"[LOG] O endereço {endereco} foi solicitado.", flush=True)
+    if not valEndereco(endereco):
+        return False
     return f"Endereço recebido: {endereco}"
 
 # ==================================================
