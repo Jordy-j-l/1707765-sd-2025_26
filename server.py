@@ -2,8 +2,7 @@
 # IMPORTS
 # ==================================================
 from xmlrpc.server import SimpleXMLRPCServer
-from web3 import Web3
-
+import requests
 
 # ==================================================
 # CONFIGURAÇÕES DO SERVIDOR RPC
@@ -17,8 +16,8 @@ PORT = 8000
 # ==================================================
 # URL do provider Ethereum / nó Ethereum
 # Exemplo: INFURA_URL, ALCHEMY_URL ou outro endpoint
-ETHEREUM_PROVIDER = "http://127.0.0.1:7545"
-w3 = Web3(Web3.HTTPProvider(ETHEREUM_PROVIDER))
+ETHERSCAN_API_KEY = "U7TZYZRAFB3KZHUU5TXYWRS9YY8A3Z3FMI"
+ETHERSCAN_URL = "https://api.etherscan.io/v2/api"
 
 
 # ==================================================
@@ -48,8 +47,20 @@ def valEndereco(endereco):
 # Devolve o saldo ao servidor RPC
 
 def consultarSaldoEthereum(endereco):
-    saldo_wei=w3.eth.get_balance(endereco)
-    saldo=w3.from_wei(saldo_wei,"ether") #saldo em ether
+    parametros = {
+        "chainid": "1",
+        "module": "account",
+        "action": "balance",
+        "address": endereco,
+        "tag": "latest",
+        "apikey": ETHERSCAN_API_KEY
+    }
+    resposta = requests.get(ETHERSCAN_URL, params=parametros)
+    dados = resposta.json()
+    if dados["status"] != "1":
+        return "Erro ao consultar saldo"
+    saldo_wei= int(dados["result"])
+    saldo=saldo_wei / 10**18 #saldo em ether
     return str(saldo)
 
 # ==================================================
@@ -64,7 +75,7 @@ def consultarSaldoEthereum(endereco):
 # 4. Devolver resultado
 
 def ping():
-    return "pong"
+    return "Ligação estabelecido com sucesso"
 
 
 def obterSaldo(endereco):
