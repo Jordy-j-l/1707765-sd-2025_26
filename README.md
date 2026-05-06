@@ -81,26 +81,27 @@ py cliente.py
 Quando o servidor é iniciado, fica à espera de chamadas RPC na porta 8000. O cliente apresenta o menu, pede um endereço Ethereum e envia esse endereço para o servidor.
 Server.py
 
-📷 Funcionamento correto:
+📷 endereço correto:
+
 ![Server Funciona](img/serverefuncxp.png)
 
-📷 endereço inválido:
-![Server Inválido](img/serverinvexp.png)
+
 
 Cliente.py
 
 📷 Cliente válido:
+
 ![Cliente Funciona](img/clientefuncexp.png)
-
-📷 Cliente inválido:
-![Cliente Inválido](img/clientinvexp.png)
-
 
 
 
 Também testei o comportamento com endereços inválidos. Quando o endereço não começa por 0x, não tem 42 caracteres ou contém caracteres não hexadecimais, o servidor devolve False e o cliente volta a pedir um novo endereço.
+📷 endereço inválido:
 
+![Server Inválido](img/serverinvexp.png)
+📷 Cliente inválido:
 
+![Cliente Inválido](img/clientinvexp.png)
 Exemplo de validação:
 •	dhdksaj7: inválido, porque não começa por 0x e não tem o tamanho correto.
 •	0xjsandjsnadksd: inválido, porque contém letras fora do conjunto hexadecimal e tem tamanho incorreto.
