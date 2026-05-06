@@ -99,6 +99,7 @@ Também testei o comportamento com endereços inválidos. Quando o endereço nã
 📷 endereço inválido:
 
 ![Server Inválido](img/serverinvexp.png)
+
 📷 Cliente inválido:
 
 ![Cliente Inválido](img/clientinvexp.png)
