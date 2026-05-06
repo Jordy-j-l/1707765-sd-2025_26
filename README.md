@@ -102,6 +102,7 @@ Também testei o comportamento com endereços inválidos. Quando o endereço nã
 📷 Cliente inválido:
 
 ![Cliente Inválido](img/clientinvexp.png)
+
 Exemplo de validação:
 •	dhdksaj7: inválido, porque não começa por 0x e não tem o tamanho correto.
 •	0xjsandjsnadksd: inválido, porque contém letras fora do conjunto hexadecimal e tem tamanho incorreto.
